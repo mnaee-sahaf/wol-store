@@ -1,4 +1,8 @@
 {% assign frames = product.metafields.custom.postcard_360_frames.value %}
+{% assign front_media = product.media[0] %}
+{% assign back_media = product.media[1] %}
+{% assign front_image = front_media.preview_image | default: front_media %}
+{% assign back_image = back_media.preview_image | default: back_media %}
 
 {% if frames != blank and frames.size > 1 %}
   <section class="wol-spin color-{{ section.settings.color_scheme }} gradient" data-wol-spin>
@@ -67,6 +71,61 @@
       });
     })();
   </script>
+{% elsif back_media != blank %}
+  <section class="wol-spin color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width wol-spin__inner">
+      <div class="wol-spin__intro">
+        <p class="wol-spin__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2>{{ section.settings.heading | escape }}</h2>
+        <p>{{ section.settings.description | escape }}</p>
+      </div>
+      <div class="wol-postcard-sides" role="list">
+        <article class="wol-postcard-sides__item" role="listitem">
+          <p class="wol-postcard-sides__label">Front</p>
+          <div class="wol-postcard-sides__media">
+            {{
+              front_image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '480, 720, 960, 1200',
+                alt: product.title
+            }}
+          </div>
+        </article>
+        <article class="wol-postcard-sides__item" role="listitem">
+          <p class="wol-postcard-sides__label">Back</p>
+          <div class="wol-postcard-sides__media">
+            {{
+              back_image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '480, 720, 960, 1200',
+                alt: product.title
+            }}
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .wol-spin { padding: clamp(4rem, 8vw, 8rem) 0; }
+    .wol-spin__inner { max-width: 110rem; }
+    .wol-spin__intro { max-width: 54rem; margin-bottom: 2.4rem; }
+    .wol-spin__eyebrow { margin: 0 0 1rem; color: rgb(var(--color-foreground)); font-family: 'Montserrat', var(--font-heading-family); font-size: 1.1rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .wol-spin__intro h2 { margin: 0; font-size: clamp(3.2rem, 6vw, 6rem); line-height: .9; }
+    .wol-postcard-sides { display: grid; gap: 2.4rem; }
+    .wol-postcard-sides__item { display: grid; gap: 1rem; }
+    .wol-postcard-sides__label { margin: 0; color: rgb(var(--color-foreground)); font-family: 'Montserrat', var(--font-heading-family); font-size: 1.1rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .wol-postcard-sides__media { overflow: hidden; border: 1px solid rgba(var(--color-foreground), .14); background: rgba(var(--color-background), .86); }
+    .wol-postcard-sides__media img { display: block; width: 100%; height: auto; }
+
+    @media screen and (min-width: 750px) {
+      .wol-postcard-sides { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
 {% endif %}
 
 {% schema %}

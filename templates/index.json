@@ -9,6 +9,15 @@
  */
 {
   "sections": {
+    "hero_about": {
+      "type": "wol-about",
+      "settings": {
+        "eyebrow": "A little piece of Pakistan",
+        "heading": "Stories worth sending.",
+        "body": "<p>West Of Lahore makes souvenirs for people who carry Pakistan with them, wherever they go.</p><p>Our postcard collections celebrate cities, sayings, poetry, and the small everyday details that make a place feel like home.</p><p>Designed to be sent, kept, pinned up, and passed on.</p>",
+        "color_scheme": "scheme-1"
+      }
+    },
     "wol-collection-explorer": {
       "type": "wol-collection-explorer",
       "blocks": {
@@ -22,15 +31,6 @@
             "link_label": "Read the cards"
           }
         },
-        "facts": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "title": "Pakistan, in facts",
-            "description": "Tiny lessons about the things that make us us.",
-            "link_label": "Know more"
-          }
-        },
         "travel": {
           "type": "collection",
           "settings": {
@@ -39,28 +39,17 @@
             "description": "A traveller's love letter to Lahore and beyond.",
             "link_label": "Take the tour"
           }
-        },
-        "culture": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "title": "For the culture",
-            "description": "Quirky sayings, inside jokes and everyday desi energy.",
-            "link_label": "See the collection"
-          }
         }
       },
       "block_order": [
         "poetry",
-        "facts",
-        "travel",
-        "culture"
+        "travel"
       ],
       "settings": {
         "eyebrow": "Pick a post",
         "heading": "Small cards, big stories.",
         "heading_size": "h0",
-        "description": "<p>Collect a little piece of Pakistan, one postcard at a time</p><p>Each dynamic card comes with a QR code at the back, to explore the story behind the card and the culture</p>",
+        "description": "<p>Collect a little piece of Pakistan, one postcard at a time.</p><p>Each card carries a QR code on the back so customers can explore the story behind the postcard and the culture around it.</p>",
         "color_scheme": "scheme-1"
       }
     },
@@ -68,16 +57,16 @@
       "type": "featured-collection",
       "settings": {
         "collection": "all",
-        "products_to_show": 4,
-        "title": "Featured products",
-        "heading_size": "h2",
+        "products_to_show": 6,
+        "title": "Featured postcards",
+        "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
         "columns_desktop": 4,
         "enable_desktop_slider": false,
         "full_width": false,
-        "show_view_all": false,
+        "show_view_all": true,
         "view_all_style": "solid",
         "color_scheme": "scheme-1",
         "image_ratio": "adapt",
@@ -87,13 +76,14 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 32,
-        "padding_bottom": 36
+        "swipe_on_mobile": true,
+        "padding_top": 24,
+        "padding_bottom": 48
       }
     }
   },
   "order": [
+    "hero_about",
     "wol-collection-explorer",
     "featured_collection"
   ]

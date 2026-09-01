@@ -6,6 +6,50 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
+  .wol-page-fallback {
+    max-width: 72rem;
+  }
+
+  .wol-page-fallback p:first-child {
+    margin-top: 0;
+  }
+
+  .wol-page-fallback__eyebrow {
+    margin: 0 0 1rem;
+    font-family: var(--font-heading-family);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .wol-page-fallback__faq {
+    margin-top: 3.2rem;
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .wol-page-fallback__faq details {
+    border: 1px solid rgba(var(--color-foreground), 0.18);
+    padding: 1.6rem 1.8rem;
+  }
+
+  .wol-page-fallback__faq summary {
+    cursor: pointer;
+    font-family: var(--font-heading-family);
+    font-size: 1.8rem;
+    font-weight: 700;
+    list-style: none;
+  }
+
+  .wol-page-fallback__faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .wol-page-fallback__faq .rte {
+    margin-top: 1.2rem;
+  }
+
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -19,7 +63,47 @@
     {{ page.title | escape }}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {{ page.content }}
+    {% if page.content != blank %}
+      {{ page.content }}
+    {% elsif page.handle == 'about' %}
+      <div class="wol-page-fallback">
+        <p class="wol-page-fallback__eyebrow">West Of Lahore</p>
+        <p>West Of Lahore makes souvenirs for people who carry Pakistan with them, wherever they go.</p>
+        <p>Our postcard collections celebrate cities, sayings, poetry, and the small everyday details that make a place feel like home.</p>
+        <p>Each card is designed to be sent, kept, pinned up, and passed on.</p>
+        <p><a href="/collections/all">Shop the full collection</a></p>
+      </div>
+    {% elsif page.handle == 'faq' %}
+      <div class="wol-page-fallback">
+        <p>Find the quick answers customers usually need before checkout.</p>
+        <div class="wol-page-fallback__faq">
+          <details open>
+            <summary>Do you ship outside Pakistan?</summary>
+            <div class="rte">
+              <p>Yes. Shipping rates and delivery timelines depend on destination and are shown during checkout. If you need a destination check before ordering, use the <a href="/pages/contact">contact page</a>.</p>
+            </div>
+          </details>
+          <details>
+            <summary>How does the QR code on each postcard work?</summary>
+            <div class="rte">
+              <p>Each postcard can link to an extra story or cultural note. Scan the QR code on the back of the card with your phone camera to open that experience.</p>
+            </div>
+          </details>
+          <details>
+            <summary>What if a postcard is sold out?</summary>
+            <div class="rte">
+              <p>Some postcard drops are small-batch. If an item is unavailable, check back for future restocks or send a message through the <a href="/pages/contact">contact page</a>.</p>
+            </div>
+          </details>
+          <details>
+            <summary>How can I contact West Of Lahore?</summary>
+            <div class="rte">
+              <p>Use the <a href="/pages/contact">contact page</a> for order support, gifting questions, or general store enquiries.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    {% endif %}
   </div>
 </div>
 

@@ -9,15 +9,100 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Frequently asked questions",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use this page to answer the questions that usually block checkout: shipping, returns, postcard details, and how to get help.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
-        "padding_top": 52,
-        "padding_bottom": 52
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 20
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "shipping": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you ship outside Pakistan?",
+            "icon": "truck",
+            "row_content": "<p>Yes. Use this answer to explain local and international delivery timelines, order processing, and any regions you do not currently ship to.</p>",
+            "page": ""
+          }
+        },
+        "returns": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I return or exchange a postcard?",
+            "icon": "return",
+            "row_content": "<p>Use this section to explain your return window, item condition rules, and whether personalized or limited-run items are final sale.</p>",
+            "page": ""
+          }
+        },
+        "qr_story": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How does the QR story on each card work?",
+            "icon": "question_mark",
+            "row_content": "<p>Each postcard can link to a story or cultural note. Explain what customers will see when they scan the code and whether the experience works on any phone.</p>",
+            "page": ""
+          }
+        },
+        "support": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How can I contact West Of Lahore?",
+            "icon": "chat_bubble",
+            "row_content": "<p>If a customer needs help with an order, direct them to the <a href=\"/pages/contact\">contact page</a> and set expectations for response time.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "shipping",
+        "returns",
+        "qr_story",
+        "support"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Orders, shipping, and postcard details",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "section",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 12,
+        "padding_bottom": 56
       }
     }
   },
   "order": [
-    "main"
+    "intro",
+    "faq"
   ]
 }

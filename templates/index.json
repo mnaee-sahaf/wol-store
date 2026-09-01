@@ -46,10 +46,10 @@
         "travel"
       ],
       "settings": {
-        "eyebrow": "Pick a post",
-        "heading": "Small cards, big stories.",
+        "eyebrow": "Shop the collections",
+        "heading": "Small cards. Big memories.",
         "heading_size": "h0",
-        "description": "<p>Collect a little piece of Pakistan, one postcard at a time.</p><p>Each card carries a QR code on the back so customers can explore the story behind the postcard and the culture around it.</p>",
+        "description": "<p>Start with a collection, not a single SKU.</p><p>Each postcard carries a QR code on the back so the story continues after the card is opened.</p>",
         "color_scheme": "scheme-1"
       }
     },
@@ -57,12 +57,12 @@
       "type": "featured-collection",
       "settings": {
         "collection": "all",
-        "products_to_show": 6,
-        "title": "Featured postcards",
+        "products_to_show": 8,
+        "title": "New and notable postcards",
         "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
+        "description": "<p>The latest designs, giftable favorites, and the cards most worth picking up first.</p>",
+        "show_description": true,
+        "description_style": "subtitle",
         "columns_desktop": 4,
         "enable_desktop_slider": false,
         "full_width": false,
@@ -80,11 +80,151 @@
         "padding_top": 24,
         "padding_bottom": 48
       }
+    },
+    "brand_note": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Why it lands",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Souvenirs feel stronger when they carry a real point of view.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>West Of Lahore works best when the store feels like a curated cultural collection, not a generic catalog. Keep the products discoverable, but make the story visible at every step.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop all postcards",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "Read the FAQ",
+            "button_link_2": "shopify://pages/faq",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-5",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "trust_points": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "QR story on every card",
+            "text": "<p>Each postcard can lead somewhere deeper, turning the product into a small cultural experience.</p>",
+            "link_label": "See how it works",
+            "link": "shopify://pages/faq"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "title": "Giftable and easy to send",
+            "text": "<p>Postcards are light, collectible, and simple to buy as a meaningful gift without overthinking it.</p>",
+            "link_label": "Browse the shop",
+            "link": "shopify://collections/all"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "title": "Built around cultural series",
+            "text": "<p>City guides, poetry, and everyday desi references give the catalog structure people can come back to.</p>",
+            "link_label": "Contact the store",
+            "link": "shopify://pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ],
+      "settings": {
+        "title": "Why customers stay on the site",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "square",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-3",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Get first access to new postcard drops",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Use email for restocks, new collections, and stories behind the latest cards.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
     "hero_about",
     "wol-collection-explorer",
-    "featured_collection"
+    "featured_collection",
+    "brand_note",
+    "trust_points",
+    "newsletter"
   ]
 }

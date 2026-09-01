@@ -9,50 +9,13 @@
  */
 {
   "sections": {
-    "image-with-text": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Our latest",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Shop all",
-            "button_link": "shopify://collections/all",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
-      "settings": {
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "center",
-        "content_layout": "no-overlap",
-        "section_color_scheme": "scheme-1",
-        "color_scheme": "scheme-1",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "padding_top": 12,
-        "padding_bottom": 32
-      }
-    },
     "wol-collection-explorer": {
       "type": "wol-collection-explorer",
       "blocks": {
         "poetry": {
           "type": "collection",
           "settings": {
+            "collection": "",
             "title": "Poetry inspired",
             "description": "Words by Ghalib, Faraz and Iqbal, ready to send.",
             "link_label": "Read the cards"
@@ -61,6 +24,7 @@
         "facts": {
           "type": "collection",
           "settings": {
+            "collection": "",
             "title": "Pakistan, in facts",
             "description": "Tiny lessons about the things that make us us.",
             "link_label": "Know more"
@@ -69,6 +33,7 @@
         "travel": {
           "type": "collection",
           "settings": {
+            "collection": "",
             "title": "City travel guides",
             "description": "A traveller's love letter to Lahore and beyond.",
             "link_label": "Take the tour"
@@ -77,6 +42,7 @@
         "culture": {
           "type": "collection",
           "settings": {
+            "collection": "",
             "title": "For the culture",
             "description": "Quirky sayings, inside jokes and everyday desi energy.",
             "link_label": "See the collection"
@@ -100,18 +66,18 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
+        "collection": "all",
+        "products_to_show": 4,
         "title": "Featured products",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 4,
         "columns_desktop": 4,
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": false,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
         "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
@@ -127,7 +93,6 @@
     }
   },
   "order": [
-    "image-with-text",
     "wol-collection-explorer",
     "featured_collection"
   ]

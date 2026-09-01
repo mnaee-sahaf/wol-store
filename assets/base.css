@@ -3635,3 +3635,323 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* Lokamade-inspired storefront refresh */
+:root {
+  --wol-brand-blue: 15, 57, 153;
+  --wol-body-text: 109, 109, 109;
+  --wol-soft-blue: 239, 244, 255;
+  --wol-border: 218, 227, 245;
+}
+
+body,
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-5 {
+  color: rgb(var(--wol-body-text));
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Roboto', var(--font-body-family);
+}
+
+.h0,
+.h1,
+.h2,
+.hxl,
+.hxxl,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.button,
+.header__menu-item,
+.announcement-bar__message,
+.footer-block__heading,
+.rich-text__caption {
+  font-family: 'Montserrat', var(--font-heading-family);
+}
+
+.h0,
+.h1,
+.h2,
+.hxl,
+.hxxl,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title,
+.inline-richtext {
+  color: rgb(var(--color-foreground));
+  letter-spacing: -0.03em;
+}
+
+p,
+.rte p,
+.rte li,
+.newsletter__subheading,
+.collection__description,
+.multicolumn-card__info .rte,
+.footer .rte {
+  color: inherit;
+}
+
+.page-width {
+  max-width: 146rem;
+}
+
+.announcement-bar {
+  border-bottom: 1px solid rgba(var(--wol-border), 0.95);
+}
+
+.announcement-bar__message {
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
+  color: rgb(var(--color-foreground));
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.header-wrapper {
+  border-bottom: 1px solid rgba(var(--wol-border), 0.95);
+}
+
+.header {
+  row-gap: 1.4rem;
+}
+
+.header__heading-link {
+  padding-top: 1rem;
+  padding-bottom: 0.6rem;
+}
+
+.header__menu-item {
+  color: rgb(var(--color-foreground));
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.header__menu-item:hover span,
+.header__active-menu-item,
+details[open] > .header__menu-item {
+  text-decoration: none;
+}
+
+.header__submenu.global-settings-popup,
+.global-settings-popup {
+  border-color: rgba(var(--wol-border), 1);
+  box-shadow: 0 1.6rem 4rem rgba(15, 57, 153, 0.08);
+}
+
+.header__submenu {
+  background: rgb(var(--color-background));
+}
+
+.header__submenu .header__menu-item {
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.button,
+.shopify-challenge__button,
+.customer button,
+.shopify-payment-button__button--unbranded {
+  border-radius: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.collection__title,
+.multicolumn__title,
+.newsletter,
+.rich-text__wrapper {
+  position: relative;
+}
+
+.collection__description,
+.newsletter__subheading,
+.rich-text__text {
+  max-width: 62rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.card--card,
+.card--standard .card__inner,
+.multicolumn-card,
+.rich-text .content-container,
+.newsletter__wrapper {
+  border-color: rgba(var(--wol-border), 1);
+  box-shadow: none;
+}
+
+.card--card,
+.card--standard .card__inner,
+.multicolumn-card {
+  background: rgb(var(--color-background));
+}
+
+.card__information {
+  padding: 2rem 1.4rem 1.8rem;
+}
+
+.card__heading,
+.card__information .full-unstyled-link,
+.card-information .full-unstyled-link {
+  color: rgb(var(--color-foreground));
+  font-family: 'Montserrat', var(--font-heading-family);
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.price,
+.price-item,
+.card-information .caption-large,
+.card-information .caption-with-letter-spacing {
+  color: inherit;
+}
+
+.card-wrapper .card,
+.card-wrapper .card__inner {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+@media (hover: hover) {
+  .card-wrapper:hover .card--card,
+  .card-wrapper:hover .card--standard .card__inner {
+    transform: translateY(-0.4rem);
+    box-shadow: 0 1.4rem 3.2rem rgba(15, 57, 153, 0.1);
+  }
+}
+
+.rich-text .content-container,
+.newsletter__wrapper {
+  background: linear-gradient(180deg, rgba(var(--wol-soft-blue), 0.6) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.rich-text__caption {
+  color: rgb(var(--color-foreground));
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.rich-text__buttons {
+  gap: 1rem;
+}
+
+.multicolumn-card {
+  padding: 2.4rem;
+}
+
+.multicolumn-card__info {
+  padding-top: 1.6rem;
+}
+
+.multicolumn-card__info h3 {
+  color: rgb(var(--color-foreground));
+  font-family: 'Montserrat', var(--font-heading-family);
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.multicolumn-card .link,
+.underlined-link {
+  color: rgb(var(--color-foreground));
+  font-family: 'Montserrat', var(--font-heading-family);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.newsletter__wrapper {
+  max-width: 112rem;
+  margin: 0 auto;
+  border: 1px solid rgba(var(--wol-border), 1);
+}
+
+.newsletter-form__field-wrapper .field,
+.footer__newsletter .field {
+  border: 1px solid rgba(var(--wol-border), 1);
+}
+
+.field__input,
+.field__label {
+  font-family: 'Roboto', var(--font-body-family);
+}
+
+.footer {
+  border-top: 1px solid rgba(var(--wol-border), 1);
+  background: rgb(var(--color-background));
+}
+
+.footer__content-bottom {
+  border-top: 1px solid rgba(var(--wol-border), 1);
+}
+
+.footer-block__heading {
+  color: rgb(var(--color-foreground));
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.footer .list-menu__item--link,
+.footer .copyright__content a,
+.footer .rte a {
+  color: rgb(var(--color-foreground));
+}
+
+@media screen and (min-width: 990px) {
+  .header--top-center .header__inline-menu {
+    width: 100%;
+  }
+
+  .header--top-center .header__inline-menu > .list-menu--inline {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .collection__title .title,
+  .multicolumn__title .title,
+  .newsletter .inline-richtext {
+    max-width: 18ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .card__information {
+    padding: 1.8rem 1.2rem 1.6rem;
+  }
+
+  .multicolumn-card,
+  .newsletter__wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

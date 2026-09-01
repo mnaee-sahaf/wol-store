@@ -1,42 +1,59 @@
 {% style %}
   .wol-about {
-    padding: clamp(4rem, 8vw, 10rem) 0;
+    padding: clamp(5rem, 9vw, 11rem) 0 clamp(4rem, 7vw, 8rem);
   }
 
   .wol-about__grid {
     display: grid;
-    gap: 3rem;
+    gap: 2.8rem;
+    align-items: start;
   }
 
   .wol-about__eyebrow {
-    margin: 0 0 1.2rem;
-    font-family: var(--font-heading-family);
-    font-size: 1.2rem;
+    margin: 0 0 1.4rem;
+    color: rgb(var(--color-foreground));
+    font-family: 'Montserrat', var(--font-heading-family);
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: .14em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
   }
 
   .wol-about__heading {
     margin: 0;
-    max-width: 12ch;
-    line-height: .94;
+    max-width: 10ch;
+    color: rgb(var(--color-foreground));
+    line-height: 0.92;
+    text-wrap: balance;
   }
 
   .wol-about__body {
     max-width: 58rem;
-    font-size: 1.8rem;
-    line-height: 1.5;
+    font-size: 1.7rem;
+    line-height: 1.75;
+    color: inherit;
   }
 
   .wol-about__body p:first-child {
     margin-top: 0;
   }
 
+  @media screen and (max-width: 749px) {
+    .wol-about__grid {
+      text-align: center;
+    }
+
+    .wol-about__heading,
+    .wol-about__body {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
   @media screen and (min-width: 750px) {
     .wol-about__grid {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-      gap: 8rem;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+      gap: clamp(4rem, 8vw, 12rem);
     }
   }
 {% endstyle %}

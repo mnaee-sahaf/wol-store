@@ -1,0 +1,132 @@
+{% liquid
+  assign card_story = product.metafields.custom.card_story
+  assign design_notes = product.metafields.custom.design_notes
+  assign thank_you_note = product.metafields.custom.thank_you_note
+  assign artist_credit = product.metafields.custom.artist_credit
+%}
+
+<section class="wol-card-story color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width wol-card-story__grid">
+    <div class="wol-card-story__lead">
+      <p class="wol-card-story__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1 class="wol-card-story__heading">{{ product.title | escape }}</h1>
+      <p class="wol-card-story__thanks">
+        {% if thank_you_note != blank %}
+          {{ thank_you_note | metafield_tag }}
+        {% else %}
+          {{ section.settings.default_thanks }}
+        {% endif %}
+      </p>
+    </div>
+
+    <div class="wol-card-story__content">
+      {% if card_story != blank %}
+        <div class="wol-card-story__body rte">{{ card_story | metafield_tag }}</div>
+      {% else %}
+        <div class="wol-card-story__body rte">
+          <p>{{ section.settings.story_placeholder }}</p>
+        </div>
+      {% endif %}
+
+      {% if design_notes != blank %}
+        <div class="wol-card-story__notes">
+          <p class="wol-card-story__label">The details</p>
+          <div class="rte">{{ design_notes | metafield_tag }}</div>
+        </div>
+      {% endif %}
+
+      {% if artist_credit != blank %}
+        <p class="wol-card-story__credit">{{ artist_credit | metafield_tag }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% if section.settings.offer_enabled %}
+  <div class="wol-offer" data-wol-offer data-delay="{{ section.settings.offer_delay | times: 1000 }}">
+    <button class="wol-offer__close" type="button" aria-label="Close offer" data-wol-offer-close>&times;</button>
+    <p class="wol-offer__eyebrow">A little thank-you</p>
+    <h2>{{ section.settings.offer_heading | escape }}</h2>
+    <p>{{ section.settings.offer_text | escape }}</p>
+    <p class="wol-offer__code">Use <strong>{{ section.settings.discount_code | escape }}</strong> at checkout</p>
+    {% form 'customer', id: 'WOLStorySignup-' | append: section.id %}
+      <input type="hidden" name="contact[tags]" value="postcard-story,qr-visitor">
+      <label class="visually-hidden" for="WOLStoryEmail-{{ section.id }}">Email address</label>
+      <div class="wol-offer__form">
+        <input id="WOLStoryEmail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" placeholder="Your email address" required>
+        <button type="submit">{{ section.settings.offer_button | escape }}</button>
+      </div>
+      {% if form.posted_successfully? %}
+        <p class="wol-offer__success">You are on the list. Keep this code for your next card.</p>
+      {% endif %}
+      {{ form.errors | default_errors }}
+    {% endform %}
+  </div>
+{% endif %}
+
+<style>
+  .wol-card-story { padding: clamp(4.8rem, 9vw, 11rem) 0; }
+  .wol-card-story__grid { display: grid; gap: 3rem; }
+  .wol-card-story__eyebrow, .wol-card-story__label, .wol-offer__eyebrow {
+    margin: 0 0 1.2rem; font-family: var(--font-heading-family); font-size: 1.2rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+  }
+  .wol-card-story__heading { margin: 0; font-size: clamp(4rem, 8vw, 9rem); line-height: .86; }
+  .wol-card-story__thanks { margin: 2.4rem 0 0; font-size: 1.8rem; line-height: 1.4; }
+  .wol-card-story__content { max-width: 62rem; }
+  .wol-card-story__body { font-size: 1.9rem; line-height: 1.55; }
+  .wol-card-story__notes { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(var(--color-foreground), .25); }
+  .wol-card-story__credit { margin-top: 2rem; font-size: 1.3rem; opacity: .75; }
+  .wol-offer {
+    position: fixed; z-index: 20; right: 1.6rem; bottom: 1.6rem; width: min(40rem, calc(100vw - 3.2rem));
+    padding: 2.6rem; color: #fcfcfc; background: #0a6076; box-shadow: .8rem .8rem 0 rgba(2, 9, 18, .22);
+    transform: translateY(calc(100% + 3rem)); opacity: 0; pointer-events: none; transition: transform .35s ease, opacity .35s ease;
+  }
+  .wol-offer.is-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .wol-offer__close { position: absolute; top: .8rem; right: 1.2rem; color: inherit; background: transparent; border: 0; font-size: 2.8rem; cursor: pointer; }
+  .wol-offer h2 { margin: 0; font-size: 3rem; line-height: .95; }
+  .wol-offer__code { padding: 1rem; color: #020912; background: #ffdfb8; font-family: var(--font-heading-family); }
+  .wol-offer__form { display: grid; grid-template-columns: 1fr auto; gap: .8rem; }
+  .wol-offer input { min-width: 0; padding: 1.2rem; border: 0; font: inherit; }
+  .wol-offer button[type="submit"] { padding: 1.2rem; color: #020912; background: #ffdfb8; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+  .wol-offer__success { font-weight: 700; }
+  @media screen and (min-width: 750px) {
+    .wol-card-story__grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 9rem; }
+    .wol-card-story__lead { position: sticky; top: 4rem; align-self: start; }
+  }
+</style>
+
+<script>
+  (() => {
+    const offer = document.querySelector('[data-wol-offer]');
+    if (!offer || window.sessionStorage.getItem('wol-story-offer-dismissed')) return;
+    const delay = Number(offer.dataset.delay || 7000);
+    window.setTimeout(() => offer.classList.add('is-visible'), delay);
+    offer.querySelector('[data-wol-offer-close]')?.addEventListener('click', () => {
+      offer.classList.remove('is-visible');
+      window.sessionStorage.setItem('wol-story-offer-dismissed', 'true');
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "WOL card story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"The story behind the card"},
+    {"type":"textarea","id":"default_thanks","label":"Default thank-you","default":"Thank you for taking a little piece of Pakistan home with you."},
+    {"type":"textarea","id":"story_placeholder","label":"Story placeholder","default":"Add this card's story in the product metafield to share the meaning behind its words, places and artwork."},
+    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"},
+    {"type":"header","content":"Thank-you offer"},
+    {"type":"checkbox","id":"offer_enabled","label":"Show offer popup","default":true},
+    {"type":"range","id":"offer_delay","label":"Popup delay","min":2,"max":20,"step":1,"unit":"s","default":7},
+    {"type":"text","id":"offer_heading","label":"Offer heading","default":"Another story is waiting."},
+    {"type":"textarea","id":"offer_text","label":"Offer text","default":"Join our postcard list and take a little off your next order."},
+    {"type":"text","id":"discount_code","label":"Discount code","default":"WOL10"},
+    {"type":"text","id":"offer_button","label":"Button label","default":"Keep me posted"}
+  ],
+  "presets":[{"name":"WOL card story"}]
+}
+{% endschema %}

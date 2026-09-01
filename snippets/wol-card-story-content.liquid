@@ -1,0 +1,166 @@
+{% liquid
+  assign card_story = product.metafields.custom.card_story
+  assign design_notes = product.metafields.custom.design_notes
+  assign thank_you_note = product.metafields.custom.thank_you_note
+  assign artist_credit = product.metafields.custom.artist_credit
+  assign product_title_downcase = product.title | downcase
+  assign is_cool_day_in_lahore = false
+
+  if product.handle == 'cool-day-in-lahore' or product_title_downcase contains 'cool day in lahore'
+    assign is_cool_day_in_lahore = true
+  endif
+
+  assign should_render_story = false
+  if is_cool_day_in_lahore or card_story != blank or design_notes != blank or thank_you_note != blank or artist_credit != blank
+    assign should_render_story = true
+  endif
+%}
+
+{% capture cool_day_thanks %}
+  Thanks for spending a cool day in Lahore with us.
+{% endcapture %}
+
+{% capture cool_day_story %}
+  <p>This postcard treats Lahore like a single generous frame: busy, layered, affectionate, and impossible to reduce to one landmark. The illustration pulls together the small visual clues that make the city instantly recognizable to the people who know it.</p>
+  <p>It is less about a tourist checklist and more about the feeling of moving through Lahore on a good day, when food, language, humor, architecture, and street life all sit in the same glance. That is why the card feels packed on purpose. The city is packed on purpose too.</p>
+  <p>West Of Lahore cards are designed to travel, but they are also designed to hold memory. Scan the QR, keep the card, and let the story stay longer than the first look.</p>
+{% endcapture %}
+
+{% capture cool_day_notes %}
+  <p><strong>Format:</strong> 5 x 7 in postcard.</p>
+  <p><strong>Setting:</strong> Lahore as an everyday cultural collage, not a single monument.</p>
+  <p><strong>Why it works:</strong> the card puts familiar references in one frame so the feeling lands fast, even from far away.</p>
+{% endcapture %}
+
+{% capture cool_day_credit %}
+  Part of the West Of Lahore city postcard series.
+{% endcapture %}
+
+{% if should_render_story %}
+  <section class="wol-card-story color-{{ color_scheme }} gradient">
+    <div class="page-width wol-card-story__grid">
+      <div class="wol-card-story__lead">
+        <p class="wol-card-story__eyebrow">{{ eyebrow | escape }}</p>
+        <h1 class="wol-card-story__heading">{{ product.title | escape }}</h1>
+        <div class="wol-card-story__meta" role="list">
+          <span class="wol-card-story__pill" role="listitem">QR postcard story</span>
+          {% if is_cool_day_in_lahore %}
+            <span class="wol-card-story__pill" role="listitem">Lahore</span>
+            <span class="wol-card-story__pill" role="listitem">5 x 7 in</span>
+          {% endif %}
+        </div>
+        <p class="wol-card-story__thanks">
+          {% if thank_you_note != blank %}
+            {{ thank_you_note | metafield_tag }}
+          {% elsif is_cool_day_in_lahore %}
+            {{ cool_day_thanks | strip }}
+          {% else %}
+            {{ default_thanks | escape }}
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="wol-card-story__content">
+        {% if card_story != blank %}
+          <div class="wol-card-story__body rte">{{ card_story | metafield_tag }}</div>
+        {% elsif is_cool_day_in_lahore %}
+          <div class="wol-card-story__body rte">{{ cool_day_story }}</div>
+        {% else %}
+          <div class="wol-card-story__body rte">
+            <p>{{ story_placeholder | escape }}</p>
+          </div>
+        {% endif %}
+
+        {% if design_notes != blank %}
+          <div class="wol-card-story__notes">
+            <p class="wol-card-story__label">The details</p>
+            <div class="rte">{{ design_notes | metafield_tag }}</div>
+          </div>
+        {% elsif is_cool_day_in_lahore %}
+          <div class="wol-card-story__notes">
+            <p class="wol-card-story__label">The details</p>
+            <div class="rte">{{ cool_day_notes }}</div>
+          </div>
+        {% endif %}
+
+        {% if artist_credit != blank %}
+          <p class="wol-card-story__credit">{{ artist_credit | metafield_tag }}</p>
+        {% elsif is_cool_day_in_lahore %}
+          <p class="wol-card-story__credit">{{ cool_day_credit | strip }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {% if offer_enabled %}
+    <div class="wol-offer" data-wol-offer data-delay="{{ offer_delay | times: 1000 }}">
+      <button class="wol-offer__close" type="button" aria-label="Close offer" data-wol-offer-close>&times;</button>
+      <p class="wol-offer__eyebrow">A little thank-you</p>
+      <h2>{{ offer_heading | escape }}</h2>
+      <p>{{ offer_text | escape }}</p>
+      <p class="wol-offer__code">Use <strong>{{ discount_code | escape }}</strong> at checkout</p>
+      {% form 'customer', id: 'WOLStorySignup-' | append: block_id %}
+        <input type="hidden" name="contact[tags]" value="postcard-story,qr-visitor">
+        <label class="visually-hidden" for="WOLStoryEmail-{{ block_id }}">Email address</label>
+        <div class="wol-offer__form">
+          <input id="WOLStoryEmail-{{ block_id }}" type="email" name="contact[email]" autocomplete="email" placeholder="Your email address" required>
+          <button type="submit">{{ offer_button | escape }}</button>
+        </div>
+        {% if form.posted_successfully? %}
+          <p class="wol-offer__success">You are on the list. Keep this code for your next card.</p>
+        {% endif %}
+        {{ form.errors | default_errors }}
+      {% endform %}
+    </div>
+  {% endif %}
+
+  <style>
+    .wol-card-story { padding: clamp(4.8rem, 9vw, 11rem) 0; }
+    .wol-card-story__grid { display: grid; gap: 3rem; }
+    .wol-card-story__eyebrow, .wol-card-story__label, .wol-offer__eyebrow {
+      margin: 0 0 1.2rem; color: rgb(var(--color-foreground)); font-family: 'Montserrat', var(--font-heading-family); font-size: 1.1rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+    }
+    .wol-card-story__heading { margin: 0; color: rgb(var(--color-foreground)); font-size: clamp(4rem, 8vw, 9rem); line-height: .86; text-wrap: balance; }
+    .wol-card-story__meta { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+    .wol-card-story__pill {
+      display: inline-flex; align-items: center; min-height: 3.2rem; padding: .5rem 1.2rem; border: 1px solid rgba(var(--color-foreground), .18);
+      color: rgb(var(--color-foreground)); background: rgba(var(--color-background), .8); font-family: 'Montserrat', var(--font-heading-family); font-size: 1.1rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .wol-card-story__thanks { margin: 2.4rem 0 0; font-size: 1.8rem; line-height: 1.6; }
+    .wol-card-story__content { max-width: 62rem; }
+    .wol-card-story__body { font-size: 1.9rem; line-height: 1.75; }
+    .wol-card-story__notes { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(var(--color-foreground), .16); }
+    .wol-card-story__credit { margin-top: 2rem; color: rgb(var(--color-foreground)); font-size: 1.3rem; opacity: .78; }
+    .wol-offer {
+      position: fixed; z-index: 20; right: 1.6rem; bottom: 1.6rem; width: min(40rem, calc(100vw - 3.2rem));
+      padding: 2.6rem; color: #fcfcfc; background: rgb(var(--color-foreground)); box-shadow: 0 1.6rem 4rem rgba(36, 48, 66, .18);
+      transform: translateY(calc(100% + 3rem)); opacity: 0; pointer-events: none; transition: transform .35s ease, opacity .35s ease;
+    }
+    .wol-offer.is-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .wol-offer__close { position: absolute; top: .8rem; right: 1.2rem; color: inherit; background: transparent; border: 0; font-size: 2.8rem; cursor: pointer; }
+    .wol-offer h2 { margin: 0; font-size: 3rem; line-height: .95; }
+    .wol-offer__code { padding: 1rem; color: rgb(var(--color-foreground)); background: rgb(var(--color-background)); font-family: 'Montserrat', var(--font-heading-family); }
+    .wol-offer__form { display: grid; grid-template-columns: 1fr auto; gap: .8rem; }
+    .wol-offer input { min-width: 0; padding: 1.2rem; border: 0; font: inherit; }
+    .wol-offer button[type="submit"] { padding: 1.2rem; color: rgb(var(--color-foreground)); background: rgb(var(--color-background)); border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+    .wol-offer__success { font-weight: 700; }
+    @media screen and (min-width: 750px) {
+      .wol-card-story__grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 9rem; }
+      .wol-card-story__lead { position: sticky; top: 4rem; align-self: start; }
+    }
+  </style>
+
+  <script>
+    (() => {
+      const offer = document.querySelector('[data-wol-offer]');
+      if (!offer || window.sessionStorage.getItem('wol-story-offer-dismissed')) return;
+      const delay = Number(offer.dataset.delay || 7000);
+      window.setTimeout(() => offer.classList.add('is-visible'), delay);
+      offer.querySelector('[data-wol-offer-close]')?.addEventListener('click', () => {
+        offer.classList.remove('is-visible');
+        window.sessionStorage.setItem('wol-story-offer-dismissed', 'true');
+      });
+    })();
+  </script>
+{% endif %}

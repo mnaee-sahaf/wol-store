@@ -746,6 +746,21 @@
         endif
       -%}
 
+      {% render 'wol-card-story-content',
+        product: product,
+        color_scheme: section.settings.color_scheme,
+        eyebrow: 'The story behind the card',
+        default_thanks: 'Thank you for taking a little piece of Pakistan home with you.',
+        story_placeholder: 'Add this card''s story in the product metafield to share the meaning behind its words, places and artwork.',
+        offer_enabled: true,
+        offer_delay: 7,
+        offer_heading: 'More postcard drops are coming.',
+        offer_text: 'Join the list for new Lahore cards, new collections, and the next QR stories.',
+        discount_code: 'WOL10',
+        offer_button: 'Keep me posted',
+        block_id: section.id
+      %}
+
       <script type="application/ld+json">
         {{ product | structured_data }}
       </script>

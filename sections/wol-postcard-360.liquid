@@ -1,0 +1,85 @@
+{% assign frames = product.metafields.custom.postcard_360_frames.value %}
+
+{% if frames != blank and frames.size > 1 %}
+  <section class="wol-spin color-{{ section.settings.color_scheme }} gradient" data-wol-spin>
+    <div class="page-width wol-spin__inner">
+      <div class="wol-spin__intro">
+        <p class="wol-spin__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2>{{ section.settings.heading | escape }}</h2>
+        <p>{{ section.settings.description | escape }}</p>
+      </div>
+      <div class="wol-spin__viewer" data-wol-spin-viewer tabindex="0" role="group" aria-label="Interactive 360 degree view of {{ product.title | escape }}">
+        {% for frame in frames %}
+          {% assign frame_image = frame.preview_image | default: frame %}
+          {{ frame_image | image_url: width: 1200 | image_tag: class: 'wol-spin__frame', loading: 'lazy', widths: '480, 720, 960, 1200', alt: product.title, data_wol_spin_frame: forloop.index0 }}
+        {% endfor %}
+        <p class="wol-spin__hint">Drag or use the controls to turn the card.</p>
+      </div>
+      <div class="wol-spin__controls">
+        <button type="button" data-wol-spin-previous aria-label="Previous view">&larr;</button>
+        <input type="range" min="0" max="{{ frames.size | minus: 1 }}" value="0" step="1" aria-label="360 degree postcard view" data-wol-spin-range>
+        <button type="button" data-wol-spin-next aria-label="Next view">&rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .wol-spin { padding: clamp(4rem, 8vw, 8rem) 0; }
+    .wol-spin__inner { max-width: 94rem; }
+    .wol-spin__intro { max-width: 54rem; margin-bottom: 2.4rem; }
+    .wol-spin__eyebrow { margin: 0 0 1rem; font-family: var(--font-heading-family); font-size: 1.2rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .wol-spin__intro h2 { margin: 0; font-size: clamp(3.2rem, 6vw, 6rem); line-height: .9; }
+    .wol-spin__viewer { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid rgba(var(--color-foreground), .2); background: rgba(var(--color-foreground), .06); cursor: ew-resize; user-select: none; touch-action: pan-y; }
+    .wol-spin__frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; }
+    .wol-spin__frame.is-active { opacity: 1; }
+    .wol-spin__hint { position: absolute; right: 1.2rem; bottom: 1.2rem; margin: 0; padding: .6rem .8rem; color: #fcfcfc; background: rgba(2, 9, 18, .75); font-size: 1.2rem; }
+    .wol-spin__controls { display: grid; grid-template-columns: 4.8rem 1fr 4.8rem; align-items: center; gap: 1rem; padding-top: 1.2rem; }
+    .wol-spin__controls button { min-height: 4.8rem; color: rgb(var(--color-foreground)); background: transparent; border: 1px solid currentColor; cursor: pointer; font-size: 2rem; }
+    .wol-spin__controls input { accent-color: rgb(var(--color-foreground)); }
+  </style>
+
+  <script>
+    (() => {
+      const root = document.currentScript.previousElementSibling?.previousElementSibling;
+      if (!root || !root.matches('[data-wol-spin]')) return;
+      const frames = [...root.querySelectorAll('[data-wol-spin-frame]')];
+      const range = root.querySelector('[data-wol-spin-range]');
+      const viewer = root.querySelector('[data-wol-spin-viewer]');
+      let active = 0;
+      let startX = 0;
+      const setFrame = (index) => {
+        active = (index + frames.length) % frames.length;
+        frames.forEach((frame, i) => frame.classList.toggle('is-active', i === active));
+        range.value = active;
+      };
+      setFrame(0);
+      range.addEventListener('input', () => setFrame(Number(range.value)));
+      root.querySelector('[data-wol-spin-previous]').addEventListener('click', () => setFrame(active - 1));
+      root.querySelector('[data-wol-spin-next]').addEventListener('click', () => setFrame(active + 1));
+      viewer.addEventListener('pointerdown', (event) => { startX = event.clientX; viewer.setPointerCapture(event.pointerId); });
+      viewer.addEventListener('pointerup', (event) => {
+        const movement = event.clientX - startX;
+        if (Math.abs(movement) > 12) setFrame(active + (movement < 0 ? 1 : -1));
+      });
+      viewer.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); setFrame(active - 1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); setFrame(active + 1); }
+      });
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name":"WOL postcard 360",
+  "tag":"section",
+  "class":"section",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"A closer look"},
+    {"type":"text","id":"heading","label":"Heading","default":"Turn the postcard around."},
+    {"type":"textarea","id":"description","label":"Description","default":"Drag across the card to see every side."},
+    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
+  ],
+  "presets":[{"name":"WOL postcard 360"}]
+}
+{% endschema %}

@@ -14,16 +14,16 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement-bar-0": {
+        "announcement_nRrRVk": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "Free shipping on orders over $10",
             "link": ""
           }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "announcement_nRrRVk"
       ],
       "settings": {
         "auto_rotate": false,
@@ -65,18 +65,6 @@
     },
     "announcement_bar_Fm7FkE": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement_jcNAdr": {
-          "type": "announcement",
-          "settings": {
-            "text": "Free Shipping on orders above $10",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_jcNAdr"
-      ],
       "name": "t:sections.announcement-bar.presets.name",
       "settings": {
         "auto_rotate": false,

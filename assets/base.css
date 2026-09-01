@@ -3638,12 +3638,12 @@ details-disclosure > details {
 
 /* Lokamade-inspired storefront refresh */
 :root {
-  --wol-brand-blue: 27, 136, 198;
-  --wol-accent-blue: 67, 171, 224;
+  --wol-brand-blue: 31, 154, 146;
+  --wol-accent-blue: 66, 199, 189;
   --wol-ink: 36, 48, 66;
-  --wol-soft-blue: 199, 230, 241;
+  --wol-soft-blue: 210, 236, 232;
   --wol-body-text: 36, 48, 66;
-  --wol-border: 165, 205, 221;
+  --wol-border: 173, 215, 209;
 }
 
 body,

@@ -1,0 +1,93 @@
+{% style %}
+  .wol-about {
+    padding: clamp(4rem, 8vw, 10rem) 0;
+  }
+
+  .wol-about__grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .wol-about__eyebrow {
+    margin: 0 0 1.2rem;
+    font-family: var(--font-heading-family);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .wol-about__heading {
+    margin: 0;
+    max-width: 12ch;
+    line-height: .94;
+  }
+
+  .wol-about__body {
+    max-width: 58rem;
+    font-size: 1.8rem;
+    line-height: 1.5;
+  }
+
+  .wol-about__body p:first-child {
+    margin-top: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .wol-about__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 8rem;
+    }
+  }
+{% endstyle %}
+
+<section class="wol-about color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width wol-about__grid">
+    <div>
+      <p class="wol-about__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1 class="wol-about__heading h0">{{ section.settings.heading | escape }}</h1>
+    </div>
+    <div class="wol-about__body rte">
+      {{ section.settings.body }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WOL about",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "A little piece of Pakistan"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stories worth sending."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Story",
+      "default": "<p>West Of Lahore makes souvenirs for people who carry Pakistan with them, wherever they go.</p><p>Our postcard collections celebrate the cities, sayings, poetry and small everyday details that make a place feel like home.</p><p>Designed to be sent, kept, pinned up and passed on.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "WOL about"
+    }
+  ]
+}
+{% endschema %}

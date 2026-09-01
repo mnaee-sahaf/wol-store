@@ -62,11 +62,37 @@
         "body": "<p>West Of Lahore makes souvenirs for people who carry Pakistan with them, wherever they go.</p><p>Our postcard collections celebrate the cities, sayings, poetry and small everyday details that make a place feel like home.</p><p>Designed by expats themselves,these souveniers are to be sent, kept, pinned up and passed on.</p>",
         "color_scheme": ""
       }
+    },
+    "announcement_bar_Fm7FkE": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_jcNAdr": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free Shipping on orders above $10",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_jcNAdr"
+      ],
+      "name": "t:sections.announcement-bar.presets.name",
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
     }
   },
   "order": [
     "announcement-bar",
     "header",
-    "wol_about_KcUNrY"
+    "wol_about_KcUNrY",
+    "announcement_bar_Fm7FkE"
   ]
 }

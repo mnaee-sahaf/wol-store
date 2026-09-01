@@ -3,6 +3,11 @@
 {% assign back_media = product.media[1] %}
 {% assign front_image = front_media.preview_image | default: front_media %}
 {% assign back_image = back_media.preview_image | default: back_media %}
+{% assign product_title_downcase = product.title | downcase %}
+{% assign is_cool_day_in_lahore = false %}
+{% if product.handle == 'cool-day-in-lahore' or product_title_downcase contains 'cool day in lahore' %}
+  {% assign is_cool_day_in_lahore = true %}
+{% endif %}
 
 {% if frames != blank and frames.size > 1 %}
   <section class="wol-spin color-{{ section.settings.color_scheme }} gradient" data-wol-spin>
@@ -71,7 +76,7 @@
       });
     })();
   </script>
-{% elsif back_media != blank %}
+{% elsif is_cool_day_in_lahore and back_media != blank %}
   <section class="wol-spin color-{{ section.settings.color_scheme }} gradient">
     <div class="page-width wol-spin__inner">
       <div class="wol-spin__intro">

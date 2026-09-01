@@ -38,6 +38,56 @@
         "padding_bottom": 32
       }
     },
+    "wol-collection-explorer": {
+      "type": "wol-collection-explorer",
+      "blocks": {
+        "poetry": {
+          "type": "collection",
+          "settings": {
+            "title": "Poetry inspired",
+            "description": "Words by Ghalib, Faraz and Iqbal, ready to send.",
+            "link_label": "Read the cards"
+          }
+        },
+        "facts": {
+          "type": "collection",
+          "settings": {
+            "title": "Pakistan, in facts",
+            "description": "Tiny lessons about the things that make us us.",
+            "link_label": "Know more"
+          }
+        },
+        "travel": {
+          "type": "collection",
+          "settings": {
+            "title": "City travel guides",
+            "description": "A traveller's love letter to Lahore and beyond.",
+            "link_label": "Take the tour"
+          }
+        },
+        "culture": {
+          "type": "collection",
+          "settings": {
+            "title": "For the culture",
+            "description": "Quirky sayings, inside jokes and everyday desi energy.",
+            "link_label": "See the collection"
+          }
+        }
+      },
+      "block_order": [
+        "poetry",
+        "facts",
+        "travel",
+        "culture"
+      ],
+      "settings": {
+        "eyebrow": "Pick a post",
+        "heading": "Small cards, big stories.",
+        "heading_size": "h0",
+        "description": "<p>Collect a little piece of Pakistan, one postcard at a time.</p>",
+        "color_scheme": "scheme-1"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -69,6 +119,7 @@
   },
   "order": [
     "image-with-text",
+    "wol-collection-explorer",
     "featured_collection"
   ]
 }

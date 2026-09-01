@@ -1,6 +1,10 @@
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
@@ -8,11 +12,11 @@
     "hero_about": {
       "type": "wol-brand-hero",
       "settings": {
-        "image": "",
+        "image": "shopify://shop_images/hero_image.png",
         "image_alt": "West Of Lahore illustrated postcard collection",
         "eyebrow": "A little piece of Pakistan",
         "heading": "Stories worth sending.",
-        "body": "<p>West Of Lahore makes souvenirs for people who carry Pakistan with them, wherever they go.</p><p>Our postcard collections celebrate cities, sayings, poetry, and the small everyday details that make a place feel like home.</p><p>Designed to be sent, kept, pinned up, and passed on.</p>",
+        "body": "<p><strong>West Of Lahore makes souvenirs for people who carry Pakistan with them, wherever they go.</strong></p><p><strong>Our postcard collections celebrate cities, sayings, poetry, and the small everyday details that make a place feel like home.</strong></p><p><strong>Designed to be sent, kept, pinned up, and passed on.</strong></p>",
         "button_label": "Shop the postcards",
         "button_link": "shopify://collections/all",
         "color_scheme": "scheme-1"

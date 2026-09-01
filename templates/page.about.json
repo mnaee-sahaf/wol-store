@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "wol-about",
+      "settings": {
+        "eyebrow": "A little piece of Pakistan",
+        "heading": "Stories worth sending.",
+        "body": "<p>West Of Lahore makes souvenirs for people who carry Pakistan with them, wherever they go.</p><p>Our postcard collections celebrate the cities, sayings, poetry and small everyday details that make a place feel like home.</p><p>Designed to be sent, kept, pinned up and passed on.</p>",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

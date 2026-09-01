@@ -15,7 +15,8 @@
         "poetry": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "poetry-poets-of-pakistan",
+            "image": "shopify://shop_images/Iqbalpoetrycardfront.png",
             "title": "Poetry inspired",
             "description": "Words by Ghalib, Faraz and Iqbal, ready to send.",
             "link_label": "Read the cards"
@@ -33,7 +34,7 @@
         "travel": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "city-tour",
             "title": "City travel guides",
             "description": "A traveller's love letter to Lahore and beyond.",
             "link_label": "Take the tour"
@@ -59,7 +60,7 @@
         "eyebrow": "Pick a post",
         "heading": "Small cards, big stories.",
         "heading_size": "h0",
-        "description": "<p>Collect a little piece of Pakistan, one postcard at a time.</p>",
+        "description": "<p>Collect a little piece of Pakistan, one postcard at a time</p><p>Each dynamic card comes with a QR code at the back, to explore the story behind the card and the culture</p>",
         "color_scheme": "scheme-1"
       }
     },
